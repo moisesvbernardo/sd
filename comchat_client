@@ -1,0 +1,24 @@
+from socket import  *
+import threading
+
+def recebedados():
+        while True:
+                data = s.recv(4096)
+                print (data.decode("UTF-8"))
+s = socket ()
+servidor = "10.10.17.1"
+porta = 8752
+
+s.connect((servidor, porta))
+t = threading.Thread(target=recebedados, args=())
+t.start()
+
+while True:
+        minhastr= input("Habla: ")
+
+        if(minhastr != None):
+
+                s.send(str.encode(minhastr,"UTF-8"))
+
+
+s.close ()
